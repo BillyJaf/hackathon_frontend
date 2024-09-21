@@ -5,12 +5,18 @@ class SliderField extends StatelessWidget {
   final String label;
   final String suffix;
   final double value;
+  final double min;
+  final double max;
+  final Function(double) onChanged;
 
   const SliderField({
     super.key,
     this.label = "Action Name",
     this.suffix = "",
     this.value = 0.0,
+    this.min = 0.0,
+    this.max = 100.0,
+    required this.onChanged,
   });
 
   @override
@@ -18,7 +24,7 @@ class SliderField extends StatelessWidget {
     return ActionField(
       label: label,
       valueWidget: SizedBox(
-        width: 60.0,
+        width: 84.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,10 +44,10 @@ class SliderField extends StatelessWidget {
         ),
       ),
       child: Slider(
-        min: 0.0,
-        max: 100.0,
+        min: min,
+        max: max,
         value: value,
-        onChanged: print,
+        onChanged: onChanged,
         inactiveColor: Theme.of(context).disabledColor,
       ),
     );

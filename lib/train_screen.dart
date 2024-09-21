@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_frontend/action_field.dart';
+import 'package:hackathon_frontend/models/health_entry.dart';
 import 'package:hackathon_frontend/option_field.dart';
 import 'package:hackathon_frontend/slider_field.dart';
 
-class TrainScreen extends StatelessWidget {
+class TrainScreen extends StatefulWidget {
   const TrainScreen({super.key});
+
+  @override
+  State<TrainScreen> createState() => _TrainScreenState();
+}
+
+class _TrainScreenState extends State<TrainScreen> {
+  HealthEntry entry = HealthEntry(
+    cream1: 1.0,
+    cream2: 1.0,
+    tookHotShower: 1.0,
+    relativeHumidity: 0.0,
+    stress: 1.0,
+    facewash1: 1.0,
+    facewash2: 1.0,
+    makeup: 1.0,
+    soap: 1.0,
+    hoursInside: 1.0,
+    dateTime: DateTime.now(),
+    skinFeelRating: 0.0,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +46,69 @@ class TrainScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: ListView(
                     shrinkWrap: true,
-                    children: const [
-                      OptionField(label: "Cream 1", options: [Option("Yes", 1.0), Option("No", 0.0)]),
-                      OptionField(label: "Cream 2", options: [Option("Yes", 1.0), Option("No", 0.0)]),
-                      OptionField(label: "Shower Temperature", options: [Option("Hot", 1.0), Option("Cold", 0.0)]),
-                      SliderField(label: "Humidity", suffix: "%"),
-                      OptionField(label: "Stress", options: [Option("High", 1.0), Option("Low", 0.0)]),
-                      OptionField(label: "Facewash 1", options: [Option("Yes", 1.0), Option("No", 0.0)]),
-                      OptionField(label: "Facewash 2", options: [Option("Yes", 1.0), Option("No", 0.0)]),
-                      OptionField(label: "Makeup", options: [Option("Yes", 1.0), Option("No", 0.0)]),
-                      OptionField(label: "Soap", options: [Option("Yes", 1.0), Option("No", 0.0)]),
-                      SliderField(label: "Hours Inside", suffix: "hrs"),
+                    children: [
+                      OptionField(
+                        label: "Cream 1",
+                        options: const [Option("Yes", 1.0), Option("No", 0.0)],
+                        value: entry.cream1,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(cream1: value)),
+                      ),
+                      OptionField(
+                        label: "Cream 2",
+                        options: const [Option("Yes", 1.0), Option("No", 0.0)],
+                        value: entry.cream2,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(cream2: value)),
+                      ),
+                      OptionField(
+                        label: "Shower Temperature",
+                        options: const [Option("Hot", 1.0), Option("Cold", 0.0)],
+                        value: entry.tookHotShower,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(tookHotShower: value)),
+                      ),
+                      SliderField(
+                        label: "Humidity",
+                        suffix: "%",
+                        value: entry.relativeHumidity,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(relativeHumidity: value)),
+                      ),
+                      OptionField(
+                        label: "Stress",
+                        options: const [Option("High", 1.0), Option("Low", 0.0)],
+                        value: entry.stress,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(stress: value)),
+                      ),
+                      OptionField(
+                        label: "Facewash 1",
+                        options: const [Option("Yes", 1.0), Option("No", 0.0)],
+                        value: entry.facewash1,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(facewash1: value)),
+                      ),
+                      OptionField(
+                        label: "Facewash 2",
+                        options: const [Option("Yes", 1.0), Option("No", 0.0)],
+                        value: entry.facewash2,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(facewash2: value)),
+                      ),
+                      OptionField(
+                        label: "Makeup",
+                        options: const [Option("Yes", 1.0), Option("No", 0.0)],
+                        value: entry.makeup,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(makeup: value)),
+                      ),
+                      OptionField(
+                        label: "Soap",
+                        options: const [Option("Yes", 1.0), Option("No", 0.0)],
+                        value: entry.soap,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(soap: value)),
+                      ),
+                      SliderField(
+                        label: "Hours Inside",
+                        suffix: "hrs",
+                        min: 0.0,
+                        max: 24.0,
+                        value: entry.hoursInside,
+                        onChanged: (value) => setState(() => entry = entry.copyWith(hoursInside: value)),
+                      )
                     ],
                   ),
                 ),

@@ -10,14 +10,16 @@ class Option {
 
 class OptionField extends StatelessWidget {
   final String label;
-  final String? value;
+  final double? value;
   final List<Option> options;
+  final Function(double) onChanged;
 
   const OptionField({
     super.key,
     this.label = "Action Name",
     this.options = const [],
     this.value,
+    required this.onChanged,
   });
 
   @override
@@ -25,8 +27,8 @@ class OptionField extends StatelessWidget {
     return ActionField(
       label: label,
       valueWidget: ToggleButtons(
-        isSelected: options.map((option) => option.label == value).toList(),
-        onPressed: (index) => print(options[index].label),
+        isSelected: options.map((option) => option.value == value).toList(),
+        onPressed: (index) => onChanged(options[index].value),
         children: options
             .map(
               (option) => Padding(
