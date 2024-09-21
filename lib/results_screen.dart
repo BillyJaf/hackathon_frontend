@@ -10,29 +10,44 @@ class ResultsScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const Expanded(child: SizedBox()),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    "Your results are in!",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Results", style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
+                    Text(
+                      "We've analyzed your data and found the best routine for your skin.",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
                 ),
-                const Expanded(child: SizedBox()),
-                PrimaryButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  text: "Done",
+              ),
+              const Expanded(child: SizedBox()),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "Your results are in!",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
+              ),
+              const Expanded(child: SizedBox()),
+              PrimaryButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                text: "Done",
+              ),
+            ],
           ),
         ),
       ),

@@ -46,8 +46,9 @@ class SliderField extends StatelessWidget {
           ),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        width: 140,
         child: SliderTheme(
           data: SliderThemeData(
             trackShape: CustomTrackShape(),
