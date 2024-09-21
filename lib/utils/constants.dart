@@ -1,1 +1,1 @@
-const String API_BASE_URL = 'https://animechan.io';
+const String API_BASE_URL = 'https://hackathon-ab-2f8e427267fc.herokuapp.com';

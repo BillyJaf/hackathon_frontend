@@ -47,11 +47,15 @@ class _RatingScreenState extends State<RatingScreen> {
                       animationEnabled: false,
                       size: MediaQuery.of(context).size.width - 100,
                       infoProperties: InfoProperties(
-                        mainLabelStyle: const TextStyle(fontSize: 72, fontWeight: FontWeight.w400),
+                        mainLabelStyle: const TextStyle(
+                            fontSize: 72, fontWeight: FontWeight.w400),
                         modifier: (double value) => value.toStringAsFixed(0),
                       ),
                       customColors: CustomSliderColors(
-                        progressBarColors: [Colors.deepPurpleAccent, Colors.deepPurple],
+                        progressBarColors: [
+                          Colors.deepPurpleAccent,
+                          Colors.deepPurple
+                        ],
                         trackColor: Colors.grey[300],
                         hideShadow: true,
                       ),
@@ -66,7 +70,8 @@ class _RatingScreenState extends State<RatingScreen> {
                   onPressed: () {
                     widget.onRatingSubmitted(
                       widget.originalEntry.copyWith(
-                        skinFeelRating: double.parse(rating.toStringAsFixed(0)),
+                        skinFeelRating:
+                            double.parse(rating.toStringAsFixed(0)) / 10,
                       ),
                     );
                   },

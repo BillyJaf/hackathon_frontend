@@ -4,21 +4,33 @@ import '../models/health_entry.dart';
 import '../utils/constants.dart';
 
 class ApiService {
-  static Future<List<HealthEntry>> fetchServerTest() async {
+  static submitHealthEntrys(List<HealthEntry> entries) async {
     const String endPoint = 'serverdata/';
-    final response = await http.get(Uri.parse('$API_BASE_URL/$endPoint'));
+    final Uri url = Uri.parse("$API_BASE_URL/$endPoint");
 
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      print(data);
-      
-      // FIXME: convert data to HealthEntry objects
-      return data.map((json) => HealthEntry.create_empty()).toList();
-    } else {
-      print('Failed to load data');
+    // Send the POST request`
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type':
+              'application/json', // Specify the content type if sending JSON data
+        },
+        body:
+            jsonEncode(entries), // Convert the requestBody map to a JSON string
+      );
 
-      // FIXME: some random data
-      return [HealthEntry.create_empty(), HealthEntry.create_empty(), HealthEntry.create_empty()];
+      // Check the response status code
+      if (response.statusCode == 200) {
+        // Request was successful
+        print('Response: ${response.body}');
+      } else {
+        // Handle the error
+        print('Failed with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that occur
+      print('Error: $e');
     }
   }
 }
