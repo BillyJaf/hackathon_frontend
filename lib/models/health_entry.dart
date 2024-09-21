@@ -73,4 +73,21 @@ class HealthEntry {
   String toString() {
     return 'HealthEntry{id: $id, cream1: $cream1, cream2: $cream2, tookHotShower: $tookHotShower, relativeHumidity: $relativeHumidity, stress: $stress, facewash1: $facewash1, facewash2: $facewash2, makeup: $makeup, soap: $soap, hoursInside: $hoursInside, dateTime: $dateTime, skinFeelRating: $skinFeelRating}';
   }
+
+  static HealthEntry create_empty() {
+    return HealthEntry(
+      cream1: 0,
+      cream2: 0,
+      tookHotShower: 0,
+      relativeHumidity: 0,
+      stress: 0,
+      facewash1: 0,
+      facewash2: 0,
+      makeup: 0,
+      soap: 0,
+      hoursInside: 0,
+      dateTime: DateTime.now(),
+      skinFeelRating: 0,
+    );
+  }
 }
