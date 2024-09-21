@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_frontend/primary_button.dart';
+import 'package:hackathon_frontend/components/primary_button.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key});
+  final Function() onDonePressed;
+
+  const ResultsScreen({
+    super.key,
+    required this.onDonePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +47,8 @@ class ResultsScreen extends StatelessWidget {
               ),
               const Expanded(child: SizedBox()),
               PrimaryButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
                 text: "Done",
+                onPressed: onDonePressed,
               ),
             ],
           ),

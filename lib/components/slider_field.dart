@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_frontend/action_field.dart';
+import 'package:hackathon_frontend/components/action_field.dart';
 
 class SliderField extends StatelessWidget {
   final String label;
@@ -33,7 +33,7 @@ class SliderField extends StatelessWidget {
             children: [
               Text(
                 value.toStringAsFixed(0),
-                style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.w400),
+                style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.right,
               ),
               const SizedBox(width: 4.0),

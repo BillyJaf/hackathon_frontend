@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_frontend/action_field.dart';
+import 'package:hackathon_frontend/components/action_field.dart';
 
 class Option {
   final String label;

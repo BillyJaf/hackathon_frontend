@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/models/health_entry.dart';
-import 'package:hackathon_frontend/option_field.dart';
-import 'package:hackathon_frontend/primary_button.dart';
-import 'package:hackathon_frontend/slider_field.dart';
+import 'package:hackathon_frontend/components/option_field.dart';
+import 'package:hackathon_frontend/components/primary_button.dart';
+import 'package:hackathon_frontend/components/slider_field.dart';
 
 class TrainScreen extends StatefulWidget {
   final Function(HealthEntry) onEntrySubmitted;
@@ -129,7 +129,7 @@ class _TrainScreenState extends State<TrainScreen> {
 
               // Submit Button
               PrimaryButton(
-                text: "Submit Actions",
+                text: "Next",
                 onPressed: () {
                   widget.onEntrySubmitted(entry.copyWith(
                     relativeHumidity: entry.relativeHumidity / 100.0, // Convert to 0.0 - 1.0 scale

@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/models/health_entry.dart';
-import 'package:hackathon_frontend/results_screen.dart';
+import 'package:hackathon_frontend/screens/results_screen.dart';
+import 'package:hackathon_frontend/screens/welcome_screen.dart';
 import 'package:hackathon_frontend/services/api_service.dart';
-import 'package:hackathon_frontend/rating_screen.dart';
+import 'package:hackathon_frontend/screens/rating_screen.dart';
 import 'package:hackathon_frontend/services/db_helper.dart';
-import 'package:hackathon_frontend/train_screen.dart';
+import 'package:hackathon_frontend/screens/train_screen.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
@@ -36,14 +37,31 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool showWelcome = true;
   bool loading = false;
   bool hasResults = false;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    if (showWelcome) {
+      return WelcomeScreen(
+        onGetStartedPressed: () {
+          setState(() {
+            showWelcome = false;
+          });
+        },
+      );
+    }
+
     if (hasResults) {
-      return const ResultsScreen();
+      return ResultsScreen(
+        onDonePressed: () {
+          setState(() {
+            showWelcome = true;
+          });
+        },
+      );
     }
 
     return TrainScreen(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/models/health_entry.dart';
-import 'package:hackathon_frontend/primary_button.dart';
+import 'package:hackathon_frontend/components/primary_button.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class RatingScreen extends StatefulWidget {
