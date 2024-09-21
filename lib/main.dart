@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_frontend/rating_screen.dart';
 import 'package:hackathon_frontend/train_screen.dart';
 
 void main() async {
@@ -6,9 +7,19 @@ void main() async {
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
 
-
-
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    title: 'AB App',
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: Colors.deepPurple,
+        accentColor: Colors.deepPurpleAccent,
+        errorColor: Colors.red,
+        brightness: Brightness.light,
+      ),
+      useMaterial3: true,
+    ),
+    home: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,18 +28,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AB App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.deepPurple,
-          accentColor: Colors.deepPurpleAccent,
-          errorColor: Colors.red,
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
-      home: const TrainScreen(),
+    return TrainScreen(
+      onEntrySubmitted: (entry) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => RatingScreen(
+              originalEntry: entry,
+              onRatingSubmitted: print, // TODO: Put API request here
+            ),
+          ),
+        );
+      },
     );
   }
 }

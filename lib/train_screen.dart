@@ -4,7 +4,12 @@ import 'package:hackathon_frontend/option_field.dart';
 import 'package:hackathon_frontend/slider_field.dart';
 
 class TrainScreen extends StatefulWidget {
-  const TrainScreen({super.key});
+  final Function(HealthEntry) onEntrySubmitted;
+
+  const TrainScreen({
+    super.key,
+    required this.onEntrySubmitted,
+  });
 
   @override
   State<TrainScreen> createState() => _TrainScreenState();
@@ -116,7 +121,12 @@ class _TrainScreenState extends State<TrainScreen> {
 
               // Submit Button
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  widget.onEntrySubmitted(entry.copyWith(
+                    relativeHumidity: entry.relativeHumidity / 100.0, // Convert to 0.0 - 1.0 scale
+                    dateTime: DateTime.now(), // Set the current time
+                  ));
+                },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor: Theme.of(context).colorScheme.primary,
