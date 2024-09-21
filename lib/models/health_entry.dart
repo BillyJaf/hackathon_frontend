@@ -93,6 +93,23 @@ class HealthEntry {
     };
   }
 
+  static fromJson(Map<String, dynamic> json) {
+    return HealthEntry(
+      cream1: json['cream1'],
+      cream2: json['cream2'],
+      tookHotShower: json['tookHotShower'],
+      relativeHumidity: json['relativeHumidity'],
+      stress: json['stress'],
+      facewash1: json['facewash1'],
+      facewash2: json['facewash2'],
+      makeup: json['makeup'],
+      soap: json['soap'],
+      hoursInside: json['hoursInside'],
+      dateTime: DateTime.now(),
+      skinFeelRating: json['skinFeelRating'],
+    );
+  }
+
   // Create a HealthEntry object from a Map (retrieved from the database)
   factory HealthEntry.fromMap(Map<String, dynamic> map) {
     return HealthEntry(

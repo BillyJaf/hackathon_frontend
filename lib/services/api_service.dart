@@ -8,6 +8,9 @@ class ApiService {
     const String endPoint = 'serverdata/';
     final Uri url = Uri.parse("$API_BASE_URL/$endPoint");
 
+    int entriesLength = entries.length;
+    print("Submitting $entriesLength health entries to backend");
+
     // Send the POST request`
     try {
       final response = await http.post(
@@ -23,7 +26,8 @@ class ApiService {
       // Check the response status code
       if (response.statusCode == 200) {
         // Request was successful
-        print('Response: ${response.body}');
+        HealthEntry healthEntry = HealthEntry.fromJson(jsonDecode(response.body));
+        print('Response: ${healthEntry}');
       } else {
         // Handle the error
         print('Failed with status code: ${response.statusCode}');
