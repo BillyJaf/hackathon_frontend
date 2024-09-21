@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/train_screen.dart';
 
-void main() {
+void main() async {
+  // Avoid errors caused by flutter upgrade.
+  // Importing 'package:flutter/widgets.dart' is required.
+  WidgetsFlutterBinding.ensureInitialized();
+
+
+
   runApp(const MyApp());
 }
 
