@@ -6,7 +6,6 @@ import 'package:hackathon_frontend/services/api_service.dart';
 import 'package:hackathon_frontend/screens/rating_screen.dart';
 import 'package:hackathon_frontend/services/db_helper.dart';
 import 'package:hackathon_frontend/screens/train_screen.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
@@ -15,9 +14,7 @@ void main() async {
 
   DBHelper.openDatabaseConnection();
   if (await DBHelper.isTableEmpty()) {
-    print("Created health_entries table and add 100 entries");
-    DBHelper.insertHealthEntries(
-        await HealthEntry.create_list_from_json_file());
+    DBHelper.insertHealthEntries(await HealthEntry.createListFromJsonFile());
   }
 
   runApp(MaterialApp(
@@ -85,12 +82,10 @@ class _MyAppState extends State<MyApp> {
                 });
                 await DBHelper.insertHealthEntry(entry);
                 List<HealthEntry> entries = await DBHelper.getHealthEntries();
-                final entriesLength = entries.length;
-                print("Send $entriesLength entries to backend");
-                await ApiService.submitHealthEntrys(entries);
-                if (context.mounted) {
+                HealthEntry? newResults = await ApiService.submitHealthEntries(entries);
+                if (context.mounted && newResults != null) {
                   setState(() {
-                    results = HealthEntry.create_empty();
+                    results = newResults;
                   });
                   Navigator.of(context).pop();
                 }

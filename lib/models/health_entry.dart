@@ -136,7 +136,7 @@ class HealthEntry {
     return 'HealthEntry{cream1: $cream1, cream2: $cream2, tookHotShower: $tookHotShower, relativeHumidity: $relativeHumidity, stress: $stress, facewash1: $facewash1, facewash2: $facewash2, makeup: $makeup, soap: $soap, hoursInside: $hoursInside, dateTime: $dateTime, skinFeelRating: $skinFeelRating}';
   }
 
-  static HealthEntry create_empty() {
+  static HealthEntry createEmpty() {
     return HealthEntry(
       cream1: 0,
       cream2: 0,
@@ -153,9 +153,8 @@ class HealthEntry {
     );
   }
 
-  static Future<List<HealthEntry>> create_list_from_json_file() async {
-    final String response =
-        await rootBundle.loadString('assets/skin_data.json');
+  static Future<List<HealthEntry>> createListFromJsonFile() async {
+    final String response = await rootBundle.loadString('assets/skin_data.json');
     final jsonData = await json.decode(response);
 
     List<HealthEntry> healthDataList = [];

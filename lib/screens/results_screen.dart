@@ -19,7 +19,7 @@ class ResultsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String modelPrediction = (results.skinFeelRating * 10).toStringAsFixed(0);
     String actualRating = (recordedRating * 10).toStringAsFixed(0);
-    String difference = ((results.skinFeelRating - recordedRating).abs() * 100).toStringAsFixed(0);
+    String difference = ((results.skinFeelRating - recordedRating).abs() * 10).toStringAsFixed(0);
 
     return Scaffold(
       body: SafeArea(
@@ -84,7 +84,7 @@ class ResultsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "However, your actual rating today was $actualRating ($difference% difference).",
+                      "However, your actual rating today was $actualRating ($difference points difference).",
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
