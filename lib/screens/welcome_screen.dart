@@ -38,9 +38,10 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(height: 8.0),
                 Text(
                   "Your health made scientific.",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 24.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

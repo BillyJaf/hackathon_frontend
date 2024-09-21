@@ -15,11 +15,13 @@ class FieldResult extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text(label,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            )),
+        Expanded(
+          child: Text(label,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              )),
+        ),
         const SizedBox(width: 8),
         Icon(
           recommended ? Icons.check : Icons.close,

@@ -57,6 +57,7 @@ class _RatingScreenState extends State<RatingScreen> {
                         height: MediaQuery.of(context).size.width - 150,
                         child: const CircularProgressIndicator(
                           strokeWidth: 24.0,
+                          strokeCap: StrokeCap.round,
                         ),
                       )
                     : SleekCircularSlider(
