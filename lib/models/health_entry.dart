@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
+
 class HealthEntry {
   final double cream1;
   final double cream2;
@@ -148,5 +151,17 @@ class HealthEntry {
       dateTime: DateTime.now(),
       skinFeelRating: 0,
     );
+  }
+
+  static Future<List<HealthEntry>> create_list_from_json_file() async {
+    final String response =
+        await rootBundle.loadString('assets/skin_data.json');
+    final jsonData = await json.decode(response);
+
+    List<HealthEntry> healthDataList = [];
+    for (var i = 0; i < jsonData.length; i++) {
+      healthDataList.add(HealthEntry.fromJson(jsonData[i]));
+    }
+    return healthDataList;
   }
 }

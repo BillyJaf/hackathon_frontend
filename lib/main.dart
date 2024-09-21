@@ -6,11 +6,19 @@ import 'package:hackathon_frontend/services/api_service.dart';
 import 'package:hackathon_frontend/screens/rating_screen.dart';
 import 'package:hackathon_frontend/services/db_helper.dart';
 import 'package:hackathon_frontend/screens/train_screen.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
+
+  DBHelper.openDatabaseConnection();
+  if (await DBHelper.isTableEmpty()) {
+    print("Created health_entries table and add 100 entries");
+    DBHelper.insertHealthEntries(
+        await HealthEntry.create_list_from_json_file());
+  }
 
   runApp(MaterialApp(
     title: 'SkinTune',
@@ -77,6 +85,8 @@ class _MyAppState extends State<MyApp> {
                 });
                 await DBHelper.insertHealthEntry(entry);
                 List<HealthEntry> entries = await DBHelper.getHealthEntries();
+                final entriesLength = entries.length;
+                print("Send $entriesLength entries to backend");
                 await ApiService.submitHealthEntrys(entries);
                 if (context.mounted) {
                   setState(() {

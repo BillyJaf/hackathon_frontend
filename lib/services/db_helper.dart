@@ -46,6 +46,23 @@ class DBHelper {
     );
   }
 
+  static Future<void> insertHealthEntries(
+      List<HealthEntry> healthEntries) async {
+    final db = await openDatabaseConnection();
+
+    final batch = db.batch();
+
+    for (final healthEntry in healthEntries) {
+      batch.insert(
+        'health_entries',
+        healthEntry.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+
+    await batch.commit(noResult: true);
+  }
+
   static Future<List<HealthEntry>> getHealthEntries() async {
     final db = await openDatabaseConnection();
 
@@ -57,5 +74,14 @@ class DBHelper {
       for (final healthEntryMap in healthEntryMaps)
         HealthEntry.fromMap(healthEntryMap),
     ];
+  }
+
+  // Method to check if the database is empty
+  static Future<bool> isTableEmpty() async {
+    final db = await openDatabaseConnection();
+    var result = await db.rawQuery('SELECT COUNT(*) FROM health_entries');
+    int? count = Sqflite.firstIntValue(result); // Retrieve the count
+
+    return count == 0;
   }
 }
