@@ -1,5 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:hackathon_frontend/models/health_entry.dart';
+import 'package:hackathon_frontend/services/api_service.dart';
 import 'package:hackathon_frontend/rating_screen.dart';
+import 'package:hackathon_frontend/services/db_helper.dart';
 import 'package:hackathon_frontend/train_screen.dart';
 
 void main() async {
@@ -34,7 +39,12 @@ class MyApp extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => RatingScreen(
               originalEntry: entry,
-              onRatingSubmitted: print, // TODO: Put API request here
+              onRatingSubmitted: (entry) async {
+                await DBHelper.insertHealthEntry(entry);
+                List<HealthEntry> entries = await DBHelper.getHealthEntries();
+                await ApiService.submitHealthEntrys(entries);
+                Navigator.of(context).pop();
+              },
             ),
           ),
         );

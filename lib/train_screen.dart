@@ -42,8 +42,10 @@ class _TrainScreenState extends State<TrainScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Title Header Text
-              const Text("Train", style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
-              const Text("Your actions today:", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+              const Text("Train",
+                  style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
+              const Text("Your actions today:",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
 
               // Action Fields
               Expanded(
@@ -56,55 +58,70 @@ class _TrainScreenState extends State<TrainScreen> {
                         label: "Cream 1",
                         options: const [Option("Yes", 1.0), Option("No", 0.0)],
                         value: entry.cream1,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(cream1: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(cream1: value)),
                       ),
                       OptionField(
                         label: "Cream 2",
                         options: const [Option("Yes", 1.0), Option("No", 0.0)],
                         value: entry.cream2,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(cream2: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(cream2: value)),
                       ),
                       OptionField(
                         label: "Shower Temperature",
-                        options: const [Option("Hot", 1.0), Option("Cold", 0.0)],
+                        options: const [
+                          Option("Hot", 1.0),
+                          Option("Cold", 0.0)
+                        ],
                         value: entry.tookHotShower,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(tookHotShower: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(tookHotShower: value)),
                       ),
                       SliderField(
                         label: "Humidity",
                         suffix: "%",
                         value: entry.relativeHumidity,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(relativeHumidity: value)),
+                        onChanged: (value) => setState(() =>
+                            entry = entry.copyWith(relativeHumidity: value)),
                       ),
                       OptionField(
                         label: "Stress",
-                        options: const [Option("High", 1.0), Option("Low", 0.0)],
+                        options: const [
+                          Option("High", 1.0),
+                          Option("Low", 0.0)
+                        ],
                         value: entry.stress,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(stress: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(stress: value)),
                       ),
                       OptionField(
                         label: "Facewash 1",
                         options: const [Option("Yes", 1.0), Option("No", 0.0)],
                         value: entry.facewash1,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(facewash1: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(facewash1: value)),
                       ),
                       OptionField(
                         label: "Facewash 2",
                         options: const [Option("Yes", 1.0), Option("No", 0.0)],
                         value: entry.facewash2,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(facewash2: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(facewash2: value)),
                       ),
                       OptionField(
                         label: "Makeup",
                         options: const [Option("Yes", 1.0), Option("No", 0.0)],
                         value: entry.makeup,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(makeup: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(makeup: value)),
                       ),
                       OptionField(
                         label: "Soap",
                         options: const [Option("Yes", 1.0), Option("No", 0.0)],
                         value: entry.soap,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(soap: value)),
+                        onChanged: (value) =>
+                            setState(() => entry = entry.copyWith(soap: value)),
                       ),
                       SliderField(
                         label: "Hours Inside",
@@ -112,7 +129,8 @@ class _TrainScreenState extends State<TrainScreen> {
                         min: 0.0,
                         max: 24.0,
                         value: entry.hoursInside,
-                        onChanged: (value) => setState(() => entry = entry.copyWith(hoursInside: value)),
+                        onChanged: (value) => setState(
+                            () => entry = entry.copyWith(hoursInside: value)),
                       )
                     ],
                   ),
@@ -123,7 +141,10 @@ class _TrainScreenState extends State<TrainScreen> {
               ElevatedButton(
                 onPressed: () {
                   widget.onEntrySubmitted(entry.copyWith(
-                    relativeHumidity: entry.relativeHumidity / 100.0, // Convert to 0.0 - 1.0 scale
+                    relativeHumidity: entry.relativeHumidity /
+                        100.0, // Convert to 0.0 - 1.0 scale
+                    hoursInside:
+                        entry.hoursInside / 24.0, // Convert to 0.0 - 1.0 scale
                     dateTime: DateTime.now(), // Set the current time
                   ));
                 },
