@@ -3,7 +3,7 @@ class HealthEntry {
       id; // Optional, in case you're storing this in a database with an auto-generated ID
   final double cream1;
   final double cream2;
-  final double tokHotShower;
+  final double tookHotShower;
   final double relativeHumidity;
   final double stress;
   final double facewash1;
@@ -11,6 +11,7 @@ class HealthEntry {
   final double makeup;
   final double soap;
   final double hoursInside;
+  final DateTime dateTime;
 
   final double skinFeelRating;
 
@@ -18,7 +19,7 @@ class HealthEntry {
     this.id,
     required this.cream1,
     required this.cream2,
-    required this.tokHotShower,
+    required this.tookHotShower,
     required this.relativeHumidity,
     required this.stress,
     required this.facewash1,
@@ -26,6 +27,7 @@ class HealthEntry {
     required this.makeup,
     required this.soap,
     required this.hoursInside,
+    required this.dateTime,
     required this.skinFeelRating,
   });
 
@@ -35,7 +37,7 @@ class HealthEntry {
       'id': id,
       'cream1': cream1,
       'cream2': cream2,
-      'tokHotShower': tokHotShower,
+      'tookHotShower': tookHotShower,
       'relativeHumidity': relativeHumidity,
       'stress': stress,
       'facewash1': facewash1,
@@ -43,6 +45,7 @@ class HealthEntry {
       'makeup': makeup,
       'soap': soap,
       'hoursInside': hoursInside,
+      'dateTime': dateTime.toIso8601String(),
       'skinFeelRating': skinFeelRating,
     };
   }
@@ -53,7 +56,7 @@ class HealthEntry {
       id: map['id'],
       cream1: map['cream1'],
       cream2: map['cream2'],
-      tokHotShower: map['tokHotShower'],
+      tookHotShower: map['tookHotShower'],
       relativeHumidity: map['relativeHumidity'],
       stress: map['stress'],
       facewash1: map['facewash1'],
@@ -61,12 +64,13 @@ class HealthEntry {
       makeup: map['makeup'],
       soap: map['soap'],
       hoursInside: map['hoursInside'],
+      dateTime: DateTime.parse(map['dateTime']),
       skinFeelRating: map['skinFeelRating'],
     );
   }
 
   @override
   String toString() {
-    return 'HealthEntry{id: $id, cream1: $cream1, cream2: $cream2, tokHotShower: $tokHotShower, relativeHumidity: $relativeHumidity, stress: $stress, facewash1: $facewash1, facewash2: $facewash2, makeup: $makeup, soap: $soap, hoursInside: $hoursInside, skinFeelRating: $skinFeelRating}';
+    return 'HealthEntry{id: $id, cream1: $cream1, cream2: $cream2, tookHotShower: $tookHotShower, relativeHumidity: $relativeHumidity, stress: $stress, facewash1: $facewash1, facewash2: $facewash2, makeup: $makeup, soap: $soap, hoursInside: $hoursInside, dateTime: $dateTime, skinFeelRating: $skinFeelRating}';
   }
 }

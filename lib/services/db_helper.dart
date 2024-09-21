@@ -17,7 +17,7 @@ class DBHelper {
       onCreate: (db, version) async {
         // Create tables here
         await db.execute(
-          'CREATE TABLE health_entries(id INTEGER PRIMARY KEY, cream1 INTEGER, cream2 INTEGER, tokHotShower INTEGER, relativeHumidity REAL, stress REAL, facewash1 INTEGER, facewash2 INTEGER, makeup INTEGER, soap INTEGER, hoursInside INTEGER, skinFeelRating INTEGER)',
+          'CREATE TABLE health_entries(id INTEGER PRIMARY KEY, cream1 INTEGER, cream2 INTEGER, tookHotShower INTEGER, relativeHumidity REAL, stress REAL, facewash1 INTEGER, facewash2 INTEGER, makeup INTEGER, soap INTEGER, hoursInside INTEGER, skinFeelRating INTEGER)',
         );
       },
       version: 1,
