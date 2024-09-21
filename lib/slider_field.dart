@@ -23,33 +23,61 @@ class SliderField extends StatelessWidget {
   Widget build(BuildContext context) {
     return ActionField(
       label: label,
-      valueWidget: SizedBox(
-        width: 84.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              value.toStringAsFixed(0),
-              style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.w400),
-              textAlign: TextAlign.right,
-            ),
-            const SizedBox(width: 4.0),
-            Text(
-              suffix,
-              style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),
-              textAlign: TextAlign.right,
-            ),
-          ],
+      valueWidget: Container(
+        transform: Matrix4.translationValues(0.0, 16.0, 0.0),
+        child: SizedBox(
+          width: 120.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                value.toStringAsFixed(0),
+                style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.w400),
+                textAlign: TextAlign.right,
+              ),
+              const SizedBox(width: 4.0),
+              Text(
+                suffix,
+                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),
+                textAlign: TextAlign.right,
+              ),
+            ],
+          ),
         ),
       ),
-      child: Slider(
-        min: min,
-        max: max,
-        value: value,
-        onChanged: onChanged,
-        inactiveColor: Theme.of(context).disabledColor,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SliderTheme(
+          data: SliderThemeData(
+            trackShape: CustomTrackShape(),
+          ),
+          child: Slider(
+            min: min,
+            max: max,
+            value: value,
+            onChanged: onChanged,
+            inactiveColor: Theme.of(context).disabledColor,
+          ),
+        ),
       ),
     );
+  }
+}
+
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight ?? 10;
+    final double trackLeft = offset.dx;
+    final double trackTop = offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

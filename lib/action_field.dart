@@ -22,18 +22,25 @@ class ActionField extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    label,
-                    style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+              child: Container(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w600,
                   ),
-                  if (child != null) child!,
-                ],
+                  textAlign: TextAlign.end,
+                ),
               ),
             ),
-            valueWidget,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                valueWidget,
+                if (child != null) child!,
+              ],
+            ),
           ],
         ),
       ),

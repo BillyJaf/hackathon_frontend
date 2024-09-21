@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/models/health_entry.dart';
+import 'package:hackathon_frontend/results_screen.dart';
 import 'package:hackathon_frontend/services/api_service.dart';
 import 'package:hackathon_frontend/rating_screen.dart';
 import 'package:hackathon_frontend/services/db_helper.dart';
@@ -27,23 +28,45 @@ void main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool loading = false;
+  bool hasResults = false;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    if (hasResults) {
+      return const ResultsScreen();
+    }
+
     return TrainScreen(
       onEntrySubmitted: (entry) {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => RatingScreen(
+              loading: loading,
               originalEntry: entry,
               onRatingSubmitted: (entry) async {
+                setState(() {
+                  loading = true;
+                });
                 await DBHelper.insertHealthEntry(entry);
                 List<HealthEntry> entries = await DBHelper.getHealthEntries();
                 await ApiService.submitHealthEntrys(entries);
-                Navigator.of(context).pop();
+                if (context.mounted) {
+                  setState(() {
+                    loading = false;
+                    hasResults = true;
+                  });
+                  Navigator.of(context).pop();
+                }
               },
             ),
           ),
