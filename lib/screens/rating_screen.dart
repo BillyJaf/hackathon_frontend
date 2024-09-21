@@ -6,11 +6,9 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 class RatingScreen extends StatefulWidget {
   final HealthEntry originalEntry;
   final Function(HealthEntry) onRatingSubmitted;
-  final bool loading;
 
   const RatingScreen({
     super.key,
-    this.loading = false,
     required this.originalEntry,
     required this.onRatingSubmitted,
   });
@@ -21,6 +19,7 @@ class RatingScreen extends StatefulWidget {
 
 class _RatingScreenState extends State<RatingScreen> {
   double rating = 0.0;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +51,14 @@ class _RatingScreenState extends State<RatingScreen> {
                   ),
                 ),
                 const Expanded(child: SizedBox()),
-                widget.loading
-                    ? SizedBox(width: MediaQuery.of(context).size.width - 100, child: const CircularProgressIndicator())
+                loading
+                    ? SizedBox(
+                        width: MediaQuery.of(context).size.width - 150,
+                        height: MediaQuery.of(context).size.width - 150,
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 24.0,
+                        ),
+                      )
                     : SleekCircularSlider(
                         min: 0,
                         max: 10,
@@ -80,13 +85,16 @@ class _RatingScreenState extends State<RatingScreen> {
                 PrimaryButton(
                   text: "Submit Rating",
                   onPressed: () {
-                    if (!widget.loading) {
+                    if (!loading) {
                       widget.onRatingSubmitted(
                         widget.originalEntry.copyWith(
                           skinFeelRating: double.parse(rating.toStringAsFixed(0)) / 10,
                         ),
                       );
                     }
+                    setState(() {
+                      loading = true;
+                    });
                   },
                 ),
               ],

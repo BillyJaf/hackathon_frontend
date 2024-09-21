@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/models/health_entry.dart';
 import 'package:hackathon_frontend/screens/results_screen.dart';
@@ -15,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MaterialApp(
-    title: 'AB App',
+    title: 'SkinTune',
     theme: ThemeData(
       colorScheme: ColorScheme.fromSwatch(
         primarySwatch: Colors.deepPurple,
@@ -38,8 +36,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool showWelcome = true;
-  bool loading = false;
-  bool hasResults = false;
+
+  double recordedRating = 0;
+  HealthEntry? results;
 
   // This widget is the root of your application.
   @override
@@ -54,8 +53,10 @@ class _MyAppState extends State<MyApp> {
       );
     }
 
-    if (hasResults) {
+    if (results != null) {
       return ResultsScreen(
+        recordedRating: recordedRating,
+        results: results!,
         onDonePressed: () {
           setState(() {
             showWelcome = true;
@@ -69,19 +70,17 @@ class _MyAppState extends State<MyApp> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => RatingScreen(
-              loading: loading,
               originalEntry: entry,
               onRatingSubmitted: (entry) async {
                 setState(() {
-                  loading = true;
+                  recordedRating = entry.skinFeelRating;
                 });
                 await DBHelper.insertHealthEntry(entry);
                 List<HealthEntry> entries = await DBHelper.getHealthEntries();
                 await ApiService.submitHealthEntrys(entries);
                 if (context.mounted) {
                   setState(() {
-                    loading = false;
-                    hasResults = true;
+                    results = HealthEntry.create_empty();
                   });
                   Navigator.of(context).pop();
                 }
