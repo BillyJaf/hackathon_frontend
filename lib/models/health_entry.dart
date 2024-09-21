@@ -1,6 +1,5 @@
 class HealthEntry {
-  final int?
-      id; // Optional, in case you're storing this in a database with an auto-generated ID
+  final int? id; // Optional, in case you're storing this in a database with an auto-generated ID
   final double cream1;
   final double cream2;
   final double tookHotShower;
@@ -30,6 +29,39 @@ class HealthEntry {
     required this.dateTime,
     required this.skinFeelRating,
   });
+
+  // To new HealthEntry object with updated values
+  HealthEntry copyWith({
+    int? id,
+    double? cream1,
+    double? cream2,
+    double? tookHotShower,
+    double? relativeHumidity,
+    double? stress,
+    double? facewash1,
+    double? facewash2,
+    double? makeup,
+    double? soap,
+    double? hoursInside,
+    DateTime? dateTime,
+    double? skinFeelRating,
+  }) {
+    return HealthEntry(
+      id: id ?? this.id,
+      cream1: cream1 ?? this.cream1,
+      cream2: cream2 ?? this.cream2,
+      tookHotShower: tookHotShower ?? this.tookHotShower,
+      relativeHumidity: relativeHumidity ?? this.relativeHumidity,
+      stress: stress ?? this.stress,
+      facewash1: facewash1 ?? this.facewash1,
+      facewash2: facewash2 ?? this.facewash2,
+      makeup: makeup ?? this.makeup,
+      soap: soap ?? this.soap,
+      hoursInside: hoursInside ?? this.hoursInside,
+      dateTime: dateTime ?? this.dateTime,
+      skinFeelRating: skinFeelRating ?? this.skinFeelRating,
+    );
+  }
 
   // Convert a HealthEntry object into a Map to store in the database
   Map<String, dynamic> toMap() {
