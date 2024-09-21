@@ -1,11 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hackathon_frontend/models/health_entry.dart';
+import 'package:hackathon_frontend/screens/results_screen.dart';
+import 'package:hackathon_frontend/screens/welcome_screen.dart';
 import 'package:hackathon_frontend/services/api_service.dart';
-import 'package:hackathon_frontend/rating_screen.dart';
+import 'package:hackathon_frontend/screens/rating_screen.dart';
 import 'package:hackathon_frontend/services/db_helper.dart';
-import 'package:hackathon_frontend/train_screen.dart';
+import 'package:hackathon_frontend/screens/train_screen.dart';
 import 'package:sqflite/sqflite.dart';
 
 void main() async {
@@ -21,7 +21,7 @@ void main() async {
   }
 
   runApp(MaterialApp(
-    title: 'AB App',
+    title: 'SkinTune',
     theme: ThemeData(
       colorScheme: ColorScheme.fromSwatch(
         primarySwatch: Colors.deepPurple,
@@ -35,12 +35,44 @@ void main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool showWelcome = true;
+
+  double recordedRating = 0;
+  HealthEntry? results;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    if (showWelcome) {
+      return WelcomeScreen(
+        onGetStartedPressed: () {
+          setState(() {
+            showWelcome = false;
+          });
+        },
+      );
+    }
+
+    if (results != null) {
+      return ResultsScreen(
+        recordedRating: recordedRating,
+        results: results!,
+        onDonePressed: () {
+          setState(() {
+            showWelcome = true;
+          });
+        },
+      );
+    }
+
     return TrainScreen(
       onEntrySubmitted: (entry) {
         Navigator.of(context).push(
@@ -48,12 +80,20 @@ class MyApp extends StatelessWidget {
             builder: (context) => RatingScreen(
               originalEntry: entry,
               onRatingSubmitted: (entry) async {
+                setState(() {
+                  recordedRating = entry.skinFeelRating;
+                });
                 await DBHelper.insertHealthEntry(entry);
                 List<HealthEntry> entries = await DBHelper.getHealthEntries();
                 final entriesLength = entries.length;
                 print("Send $entriesLength entries to backend");
                 await ApiService.submitHealthEntrys(entries);
-                Navigator.of(context).pop();
+                if (context.mounted) {
+                  setState(() {
+                    results = HealthEntry.create_empty();
+                  });
+                  Navigator.of(context).pop();
+                }
               },
             ),
           ),

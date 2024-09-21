@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_frontend/action_field.dart';
+import 'package:hackathon_frontend/components/action_field.dart';
 
 class Option {
   final String label;
@@ -31,11 +31,13 @@ class OptionField extends StatelessWidget {
         onPressed: (index) => onChanged(options[index].value),
         children: options
             .map(
-              (option) => Padding(
+              (option) => Container(
                 padding: const EdgeInsets.all(12.0),
+                constraints: const BoxConstraints(minWidth: 70.0),
                 child: Text(
                   option.label,
                   style: const TextStyle(fontSize: 18.0),
+                  textAlign: TextAlign.center,
                 ),
               ),
             )
