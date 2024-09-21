@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_frontend/services/api_service.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
 
-
+  await ApiService.fetchServerTest();
 
   runApp(const MyApp());
 }
