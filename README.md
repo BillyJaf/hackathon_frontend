@@ -1,16 +1,29 @@
-# hackathon_frontend
+# SkinTune Application Frontend - ANU Hackathon 2024
 
-A new Flutter project.
+In collaboration with @jamesnoonan, @chethin and @kpate123.
 
-## Getting Started
+An AB-testing framework application for people with skin issues, suitable for IOS.
 
-This project is a starting point for a Flutter application.
+## Use-Case:
 
-A few resources to get you started if this is your first Flutter project:
+SkinTune’s demographic are people who have mild-moderate skin issues that would typically require 
+multiple consultations to find a somewhat trivial solution. This app removes the need for professional
+opinions, which often results in guesswork regardless. Passively take charge of your health by spending 
+less than one minute a day journaling your schedule and let SkinTune help find your tailored treatment.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Interface:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Upon entry, the user is prompted to rate their day on several metrics relevant to skincare. Next, the user 
+enters how their skin felt at the end of the day. Then, on the popular hosting framework, Heroku, the 
+team has created a custom API which the application uses to send data to the neural network hosted in 
+the cloud (the backend code can be found (here)[https://github.com/BillyJaf/hackathon_backend]). 
+SkinTune learns external factors that impact consumers skin-health and compares its 
+predictions to user input. Following this, a list of currently optimal conditions are fed back to the user for trial.
+The following can be seen in the friendly UI:
+![image](https://github.com/user-attachments/assets/8f74e450-f95c-4c1c-b686-235f8a205ade)
+
+## Installation:
+
+The application is suitable for, and can be downloaded on, IOS () but can also be downloaded onto () IOS emulator.
+
+### Steps:
